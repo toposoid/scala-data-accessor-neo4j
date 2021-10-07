@@ -1,6 +1,7 @@
 # scala-data-accessor-neo4j
 This is a common library used by Linked Ideal LLC. in Scala projects.
 The main implementation of this project is the neo4j driver Wrapper.
+[![Unit Test Action](https://github.com/toposoid/scala-data-accessor-neo4j/actions/workflows/action.yml/badge.svg?branch=main)](https://github.com/toposoid/scala-data-accessor-neo4j/actions/workflows/action.yml)
 
 ## Requirements
 Scala version 2.12.x,   
