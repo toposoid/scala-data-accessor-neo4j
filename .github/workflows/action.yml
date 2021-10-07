@@ -2,7 +2,7 @@ name: Unit Test Action
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 env:
   PJ_ACTOR: toposoid
