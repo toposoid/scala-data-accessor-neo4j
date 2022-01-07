@@ -3,10 +3,13 @@ on:
   push:
     branches:
       - main
+      - feature
   workflow_dispatch:
 env:
   PJ_ACTOR: toposoid
   PJ_REPO: scala-data-accessor-neo4j
+  PJ_BRANCH: feature
+  PJ_VERSION: 0.2
 jobs:
   unit-test_scala-data-accessor-neo4j:
     runs-on: ubuntu-20.04
@@ -19,7 +22,7 @@ jobs:
         run: |
             cd ${GITHUB_WORKSPACE} && cd ../
             cd ./${{ env.PJ_REPO }}
-            docker build --tag scala-data-accessor-neo4j:0.1.0 -f Dockerfile-workflow .
+            docker build --build-arg TARGET_BRANCH=${{ env.PJ_BRANCH }} --tag scala-data-accessor-neo4j:${{ env.PJ_VERSION }} -f Dockerfile-workflow .
             docker-compose -f docker-compose-workflow.yml up -d
             docker-compose -f docker-compose-workflow.yml exec -T scala-data-accessor-neo4j bash -c "cd scala-data-accessor-neo4j && sbt headerCheck"
             docker-compose -f docker-compose-workflow.yml exec -T scala-data-accessor-neo4j bash -c "cd scala-data-accessor-neo4j && sbt test:headerCheck"
