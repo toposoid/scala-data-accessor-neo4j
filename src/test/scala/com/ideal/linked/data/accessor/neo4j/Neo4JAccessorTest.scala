@@ -20,11 +20,11 @@ import org.neo4j.driver.{Record, Result}
 import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, DiagrammedAssertions, FlatSpec}
 
 class Neo4JAccessorTest extends FlatSpec with DiagrammedAssertions with BeforeAndAfter with BeforeAndAfterAll {
-  def before(): Unit = {
+  before {
     Neo4JAccessor.delete()
   }
 
-  def after():Unit = {
+  after {
     Neo4JAccessor.delete()
   }
 
