@@ -8,7 +8,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "scala-data-accessor-neo4j",
     libraryDependencies += "org.neo4j.driver" % "neo4j-java-driver" % "4.2.5",
-    libraryDependencies += "com.ideal.linked" %% "scala-common" % "0.3-SNAPSHOT",
+    libraryDependencies += "com.ideal.linked" %% "scala-common" % "0.3",
     libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.5" % Test,
     libraryDependencies += scalaTest % Test
   )
