@@ -8,7 +8,7 @@ networks:
         - subnet: 172.30.0.0/24
 services:
   scala-data-accessor-neo4j:
-    image: scala-data-accessor-neo4j:0.4
+    image: scala-data-accessor-neo4j:0.5-SNAPSHOT
     tty: true
     environment:
       - GRAPHDB_HOST=172.30.0.2
