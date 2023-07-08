@@ -9,8 +9,8 @@ lazy val root = (project in file("."))
     name := "scala-data-accessor-neo4j",
     libraryDependencies += "org.neo4j.driver" % "neo4j-java-driver" % "4.2.5",
     libraryDependencies += "com.ideal.linked" %% "scala-common" % "0.5-SNAPSHOT",
-    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.0" % Test,
-      libraryDependencies += "org.scalatest" %% "scalatest-flatspec" % "3.2.11" % Test,
+    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.17.0" % Test,
+    libraryDependencies += "org.scalatest" %% "scalatest-flatspec" % "3.2.16" % Test,
     libraryDependencies += scalaTest % Test
   )
   .enablePlugins(AutomateHeaderPlugin)
