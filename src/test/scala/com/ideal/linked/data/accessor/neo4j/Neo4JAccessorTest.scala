@@ -17,9 +17,11 @@
 package com.ideal.linked.data.accessor.neo4j
 
 import org.neo4j.driver.{Record, Result}
-import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, DiagrammedAssertions, FlatSpec}
 
-class Neo4JAccessorTest extends FlatSpec with DiagrammedAssertions with BeforeAndAfter with BeforeAndAfterAll {
+import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll}
+import org.scalatest.flatspec.AnyFlatSpec
+
+class Neo4JAccessorTest extends AnyFlatSpec  with BeforeAndAfter with BeforeAndAfterAll {
   before {
     Neo4JAccessor.delete()
   }

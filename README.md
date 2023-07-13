@@ -5,8 +5,8 @@ The main implementation of this project is the neo4j driver Wrapper.
 [![Unit Test Action](https://github.com/toposoid/scala-data-accessor-neo4j/actions/workflows/action.yml/badge.svg?branch=main)](https://github.com/toposoid/scala-data-accessor-neo4j/actions/workflows/action.yml)
 
 ## Requirements
-Scala version 2.12.x,   
-Sbt version 1.2.8.
+Scala version 2.13.x,   
+Sbt version 1.9.0.
 Neo4j version 4.x
 
 ## Setup

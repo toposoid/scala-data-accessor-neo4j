@@ -1,6 +1,6 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.12.12"
+ThisBuild / scalaVersion     := "2.13.11"
 ThisBuild / version          := "0.5-SNAPSHOT"
 ThisBuild / organization     := "com.ideal.linked"
 
@@ -9,7 +9,8 @@ lazy val root = (project in file("."))
     name := "scala-data-accessor-neo4j",
     libraryDependencies += "org.neo4j.driver" % "neo4j-java-driver" % "4.2.5",
     libraryDependencies += "com.ideal.linked" %% "scala-common" % "0.5-SNAPSHOT",
-    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.5" % Test,
+    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.17.0" % Test,
+    libraryDependencies += "org.scalatest" %% "scalatest-flatspec" % "3.2.16" % Test,
     libraryDependencies += scalaTest % Test
   )
   .enablePlugins(AutomateHeaderPlugin)
