@@ -22,6 +22,7 @@ import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll}
 import org.scalatest.flatspec.AnyFlatSpec
 
 class Neo4JAccessorTest extends AnyFlatSpec  with BeforeAndAfter with BeforeAndAfterAll {
+  val re = "UNION ALL\n$".r
   before {
     Neo4JAccessor.delete()
   }
@@ -59,6 +60,40 @@ class Neo4JAccessorTest extends AnyFlatSpec  with BeforeAndAfter with BeforeAndA
     Neo4JAccessor.close()
   }
 
+  "Create Node And Relation" should "Search Created Relation" in {
 
+    val query1 =
+    """|MERGE (:PremiseNode {nodeName: "黒", nodeId:'eb82e130-cb89-464c-9b28-164d37eb2912-1', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138', currentId:'1', parentId:'-1', isMainSection:'true', surface:"黒髪ではない。", normalizedName:"黒", dependType:'D', caseType:'文末', namedEntity:'', rangeExpressions:'{"":{}}', categories:'{"黒":"色","髪":"動物-部位"}', domains:'{"":""}', isDenialWord:'true',isConditionalConnection:'false',normalizedNameYomi:'くろかみ',surfaceYomi:'くろかみではない。',modalityType:'-',logicType:'-',lang:'ja_JP', extentText:'{}' })
+       |MERGE (:SynonymNode {nodeId:'黒色_eb82e130-cb89-464c-9b28-164d37eb2912-1', nodeName:'黒色', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138'})
+       |UNION ALL
+       |MATCH (s:SynonymNode {nodeId: '黒色_eb82e130-cb89-464c-9b28-164d37eb2912-1'}), (d:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-1'}) MERGE (s)-[:SynonymEdge {similality:0.5}]->(d)
+       |UNION ALL
+       |MERGE (:PremiseNode {nodeName: "-", nodeId:'eb82e130-cb89-464c-9b28-164d37eb2912-0', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138', currentId:'0', parentId:'1', isMainSection:'false', surface:"Ｂは", normalizedName:"-", dependType:'D', caseType:'未格', namedEntity:'', rangeExpressions:'{"":{}}', categories:'{"":""}', domains:'{"":""}', isDenialWord:'false',isConditionalConnection:'false',normalizedNameYomi:'',surfaceYomi:'Ｂは',modalityType:'-',logicType:'-',lang:'ja_JP', extentText:'{}' })
+       |MERGE (:SynonymNode {nodeId:'‐_eb82e130-cb89-464c-9b28-164d37eb2912-0', nodeName:'‐', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138'})
+       |UNION ALL
+       |MATCH (s:SynonymNode {nodeId: '‐_eb82e130-cb89-464c-9b28-164d37eb2912-0'}), (d:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-0'}) MERGE (s)-[:SynonymEdge {similality:0.5}]->(d)
+       |UNION ALL
+       |MERGE (:SynonymNode {nodeId:'～_eb82e130-cb89-464c-9b28-164d37eb2912-0', nodeName:'～', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138'})
+       |UNION ALL
+       |MATCH (s:SynonymNode {nodeId: '～_eb82e130-cb89-464c-9b28-164d37eb2912-0'}), (d:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-0'}) MERGE (s)-[:SynonymEdge {similality:0.5}]->(d)
+       |UNION ALL
+       |MERGE (:SynonymNode {nodeId:'–_eb82e130-cb89-464c-9b28-164d37eb2912-0', nodeName:'–', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138'})
+       |UNION ALL
+       |MATCH (s:SynonymNode {nodeId: '–_eb82e130-cb89-464c-9b28-164d37eb2912-0'}), (d:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-0'}) MERGE (s)-[:SynonymEdge {similality:0.5}]->(d)
+       |UNION ALL
+       |MERGE (:SynonymNode {nodeId:'－_eb82e130-cb89-464c-9b28-164d37eb2912-0', nodeName:'－', propositionId:'9b59028e-f878-4afe-af12-91a0e8a57138'})
+       |UNION ALL
+       |MATCH (s:SynonymNode {nodeId: '－_eb82e130-cb89-464c-9b28-164d37eb2912-0'}), (d:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-0'}) MERGE (s)-[:SynonymEdge {similality:0.5}]->(d)
+       |UNION ALL
+       |"""
 
+    Neo4JAccessor.executeQuery(re.replaceAllIn(query1.toString().stripMargin, ""))
+    val result: Result = Neo4JAccessor.executeQueryAndReturn("MATCH (s:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-0'}), (d:PremiseNode {nodeId: 'eb82e130-cb89-464c-9b28-164d37eb2912-1'}) RETURN s, d")
+    while (result.hasNext()) {
+      val record: Record = result.next()
+      assert(record.get("s").get("nodeId").asString().equals("eb82e130-cb89-464c-9b28-164d37eb2912-0"))
+    }
+    Neo4JAccessor.close()
+
+  }
 }
