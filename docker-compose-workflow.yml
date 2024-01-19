@@ -11,7 +11,7 @@ services:
     image: scala-data-accessor-neo4j:0.5-SNAPSHOT
     tty: true
     environment:
-      - GRAPHDB_HOST=172.30.0.2
+      - TOPOSOID_GRAPHDB_HOST=172.30.0.2
     networks:
       app_net:
         ipv4_address: 172.30.0.3
