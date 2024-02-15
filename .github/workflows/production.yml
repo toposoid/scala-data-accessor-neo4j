@@ -10,7 +10,7 @@ env:
   PJ_ACTOR: toposoid
   PJ_REPO: scala-data-accessor-neo4j
   PJ_BRANCH: main
-  PJ_VERSION: 0.4
+  PJ_VERSION: 0.5
 jobs:
   unit-test_scala-data-accessor-neo4j:
     runs-on: ubuntu-20.04
