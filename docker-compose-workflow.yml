@@ -1,7 +1,7 @@
 version: '3'
 services:
   scala-data-accessor-neo4j:
-    image: scala-data-accessor-neo4j:0.5
+    image: scala-data-accessor-neo4j:0.6-SNAPSHOT
     tty: true
     environment:
       - TOPOSOID_GRAPHDB_HOST=neo4j
