@@ -50,8 +50,9 @@ object Neo4JAccessor extends LazyLogging {
     logger.trace(query)
     val session = driver.session
     val result:Result = session.run(query)
-    return result
+    result
   }match {
+    case Success(s) => s
     case Failure(e) => throw e
   }
 
